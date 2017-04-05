@@ -1,0 +1,28 @@
+<section name="UpdateEvent">
+    <md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding>
+        <div>
+            <md-input-container>
+                <label>Nombre</label>
+                <input ng-model="$ctrl.editEvent.name">
+            </md-input-container>
+
+            <md-input-container>
+                <label>Descripción</label>
+                <input ng-model="$ctrl.editEvent.description">
+            </md-input-container>
+        </div>
+        <div>
+            <md-input-container>
+                <label>Fecha de inicio</label>
+                <input ng-model="$ctrl.editEvent.beginDate">
+            </md-input-container>
+            <md-input-container>
+                <label>Fecha de fin</label>
+                <input ng-model="$ctrl.editEvent.endDate">
+            </md-input-container>
+        </div>
+        <div>
+            <md-button ng-click="$ctrl.updateEvent()">Actualizar</md-button>
+        </div>
+    </md-content>
+</section>

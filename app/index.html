@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Leisure</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+  <link rel="stylesheet" href="app.css">
+
+  <!-- default themes and core styles -->
+  <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+
+  <!-- extra, overriding theme files -->
+  <link rel="stylesheet" href="bower_components/angular-material/themes/indigo-theme.css">
+  <link rel="stylesheet" href="bower_components/angular-material/themes/green-theme.css">
+  
+  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+<body>
+  <!--<ul class="menu">
+    <li><a href="#!/view1">view1</a></li>
+    <li><a href="#!/view2">view2</a></li>
+    <li><a href="#!/getAllArtists">Artists</a></li>
+
+  </ul>-->
+
+  <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+
+  <!--<div ng-view></div>-->
+  
+  <menu></menu>
+  <div class="container text-center" style="padding-top:60px;" ui-view></div>
+  <!--<div ui-view></div>-->
+
+  <div>Leisure app: v<span app-version></span></div>
+
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+  -->
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-aria/angular-aria.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-material/angular-material.js"></script>
+  <script src="app.js"></script>
+  <script src="view1/view1.js"></script>
+  <script src="view2/view2.js"></script>
+  <script src="components/version/version.js"></script>
+  <script src="components/version/version-directive.js"></script>
+  <script src="components/version/interpolate-filter.js"></script>
+  <script src="components/menu/menu.js"></script>
+
+
+  <!--Estados-->
+  <script src="./states/states.js"></script>
+  <script src="./states/home/home.js"></script>
+	<script src="./states/artist/getAllArtists.js"></script>
+	<script src="./states/artist/getArtist.js"></script>	
+	<script src="./states/artist/createArtist.js"></script>
+	<script src="./states/artist/deleteArtist.js"></script>
+	<script src="./states/artist/updateArtist.js"></script>
+  <script src="./states/local/getAllLocals.js"></script>
+	<script src="./states/local/getLocal.js"></script>	
+	<script src="./states/local/createLocal.js"></script>
+	<script src="./states/local/deleteLocal.js"></script>
+	<script src="./states/local/updateLocal.js"></script>
+  <script src="./states/event/getAllEvents.js"></script>
+	<script src="./states/event/getEvent.js"></script>	
+	<script src="./states/event/createEvent.js"></script>
+	<script src="./states/event/deleteEvent.js"></script>
+	<script src="./states/event/updateEvent.js"></script>
+  <script src="./states/event/commentEvent.js"></script>
+  <script src="./states/event/rateEvent.js"></script>
+  <script src="./states/user/getAllUsers.js"></script>
+	<script src="./states/user/getUser.js"></script>	
+	<script src="./states/user/createUser.js"></script>
+	<script src="./states/user/deleteUser.js"></script>
+	<script src="./states/user/updateUser.js"></script>
+  <script src="./states/test/test.js"></script>
+
+
+  <!--Servicios-->  
+  <script src="./services/services.js"></script>
+  <script src="./services/artistsService.js"></script>
+  <script src="./services/localsService.js"></script>
+  <script src="./services/eventsService.js"></script>
+  <script src="./services/usersService.js"></script>
+  <script src="./services/commentsService.js"></script>
+  <script src="./services/ratingsService.js"></script>
+
+
+
+
+
+
+</body>
+</html>

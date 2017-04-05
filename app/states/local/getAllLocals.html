@@ -1,0 +1,20 @@
+<section name="GetAllLocals">
+  	<div flex layout-margin>
+	  <md-content flex>
+		<md-list>
+		<md-subheader class="md-no-sticky">Locales</md-subheader>
+		<md-list-item class="md-2-line contact-item" ng-repeat="local in $ctrl.locals" ng-click="$ctrl.localDetails(local.id)">
+			<!--<img ng-src="{{contact.image}}" class="md-avatar" alt="{{contact.name}}" />-->
+			<div class="md-list-item-text compact">
+				<p>{{local.id}}</p>
+				<h3>{{local.name}}</h3>
+				<p>{{local.description}}</p>
+				<p>{{local.capacity}}</p>
+                <p>{{artist.rating}}</p>
+			</div>
+			<md-divider ng-if="!$last"></md-divider>
+		</md-list-item>
+	</md-list>
+  	</md-content>
+  	</div>
+</section>

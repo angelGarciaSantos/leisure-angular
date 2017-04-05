@@ -1,0 +1,28 @@
+<section name="CreateLocal">
+    <md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding>
+        <div>
+            <md-input-container>
+                <label>Nombre</label>
+                <input ng-model="$ctrl.newLocal.name">
+            </md-input-container>
+
+            <md-input-container>
+                <label>Descripción</label>
+                <input ng-model="$ctrl.newLocal.description">
+            </md-input-container>
+        </div>
+        <div>
+            <md-input-container class="md-icon-float md-icon-right md-block">
+                <label>Capacidad</label>
+                <input ng-model="$ctrl.newLocal.capacity" type="number" step="1" min="0">
+            </md-input-container>
+            <md-input-container class="md-icon-float md-icon-right md-block">
+                <label>Valoración</label>
+                <input ng-model="$ctrl.newLocal.rating" type="number" step="1" min="0" max="10">
+            </md-input-container>
+        </div>
+        <div>
+            <md-button ng-click="$ctrl.createLocal()">Create</md-button>
+        </div>
+    </md-content>
+</section>

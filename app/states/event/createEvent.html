@@ -1,0 +1,28 @@
+<section name="CreateEvent">
+    <md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding>
+        <div>
+            <md-input-container>
+                <label>Nombre</label>
+                <input ng-model="$ctrl.newEvent.name">
+            </md-input-container>
+
+            <md-input-container>
+                <label>Descripción</label>
+                <input ng-model="$ctrl.newEvent.description">
+            </md-input-container>
+        </div>
+        <div>
+            <div flex-gt-xs>
+                <h4>Inicio</h4>
+                <md-datepicker ng-model="$ctrl.newEvent.beginDate" md-placeholder="Selecciona la fecha"></md-datepicker>
+            </div>
+            <div flex-gt-xs>
+                <h4>Fin</h4>
+                <md-datepicker ng-model="$ctrl.newEvent.endDate" md-placeholder="Selecciona la fecha"></md-datepicker>
+            </div>
+        </div>
+        <div>
+            <md-button ng-click="$ctrl.createEvent()">Crear</md-button>
+        </div>
+    </md-content>
+</section>

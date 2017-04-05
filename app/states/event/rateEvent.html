@@ -1,0 +1,13 @@
+<section name="RateEvent">
+    <md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding>
+        <div>
+            <md-input-container>
+                <label>Valora el evento</label>
+                <input ng-model="$ctrl.newRating.rating" type="number" step="1" min="1" max="10">
+            </md-input-container>
+        </div>
+        <div>
+            <md-button ng-click="$ctrl.rateEvent()">Valorar</md-button>
+        </div>
+    </md-content>
+</section>

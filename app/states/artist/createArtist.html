@@ -1,0 +1,44 @@
+<section name="CreateArtist">
+    <!--<form>
+        <div class="form-group">
+            <label for="id">Id</label>
+            <input type="id" class="form-control" id="id" placeholder="Introduce Id" ng-model="$ctrl.newArtist.id">
+        </div>
+        <div class="form-group">
+            <label for="name">Nombre</label>
+            <input type="name" class="form-control" id="name" placeholder="Introduce Nombre" ng-model="$ctrl.newArtist.name">
+        </div>
+        <div class="form-group">
+            <label for="description">Descripción</label>
+            <input type="description" class="form-control" id="description" placeholder="Introduce Descripcion" ng-model="$ctrl.newArtist.description">
+        </div>
+        <div class="form-group">
+            <label for="rating">Valoración</label>
+            <input type="rating" class="form-control" id="rating" placeholder="Introduce valoración" ng-model="$ctrl.newArtist.rating">
+        </div>
+
+        <button type="submit" class="btn btn-default" ng-click="$ctrl.createArtist()">Crear</button>
+    </form>-->
+    <md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding>
+        <div>
+            <md-input-container>
+                <label>Nombre</label>
+                <input ng-model="$ctrl.newArtist.name">
+            </md-input-container>
+
+            <md-input-container>
+                <label>Descripción</label>
+                <input ng-model="$ctrl.newArtist.description">
+            </md-input-container>
+        </div>
+        <div>
+            <md-input-container class="md-icon-float md-icon-right md-block">
+                <label>Valoración</label>
+                <input ng-model="$ctrl.newArtist.rating" type="number" step="1" min="0" max="10">
+            </md-input-container>
+        </div>
+        <div>
+            <md-button ng-click="$ctrl.createArtist()">Create</md-button>
+        </div>
+    </md-content>
+</section>
