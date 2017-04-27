@@ -22,6 +22,17 @@
 			{ 'update': { method: 'PUT' } }// un método custom con el verobo put para actualizaciones
 		); 
 
+		this.globalRatingEvent = $resource(
+            "http://localhost:8080/leisure/rating/event/:id", // plantilla de la url del api
+			{ id: '@id' }, // la plantilla se rellena con la propiedad id
+			{ 'update': { method: 'PUT' } }// un método custom con el verobo put para actualizaciones
+		); 
+
+		this.globalRatingArtist = $resource(
+            "http://localhost:8080/leisure/rating/artist/:id", // plantilla de la url del api
+			{ id: '@id' }, // la plantilla se rellena con la propiedad id
+			{ 'update': { method: 'PUT' } }// un método custom con el verobo put para actualizaciones
+		); 
 
 	};
 } ());

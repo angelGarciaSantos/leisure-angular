@@ -10,12 +10,16 @@
 		})
 		.component('getArtist', {
 			templateUrl: './states/artist/getArtist.html',
-			controller: function (artistsService, $state, $stateParams) {
+			controller: function (artistsService, $state, $stateParams, ratingsService) {
                 var vm = this;
                 this.valorCorte = 1;
 
-                var artistId = $stateParams.id;
-                vm.artist = artistsService.artists.get({ id: artistId });
+                vm.artistId = $stateParams.id;
+                vm.artist = artistsService.artists.get({ id: vm.artistId });
+
+				ratingsService.globalRatingArtist.query({ id: vm.artistId }).$promise.then(function(data) {
+					vm.globalRating = data;
+				});
 			}
 		})
 

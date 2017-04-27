@@ -1,8 +1,9 @@
 <section name="GetAllUsers">
   	<div flex layout-margin>
 	  <md-content flex>
+		<md-button ui-sref="createUser()">Editar</md-button>
 		<md-list>
-		<md-subheader class="md-no-sticky">Useres</md-subheader>
+		<md-subheader class="md-no-sticky">Usuarios</md-subheader>
 		<md-list-item class="md-2-line contact-item" ng-repeat="user in $ctrl.users" ng-click="$ctrl.userDetails(user.id)">
 			<!--<img ng-src="{{contact.image}}" class="md-avatar" alt="{{contact.name}}" />-->
 			<div class="md-list-item-text compact">

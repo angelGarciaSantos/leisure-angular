@@ -1,6 +1,7 @@
 <section name="GetAllLocals">
   	<div flex layout-margin>
 	  <md-content flex>
+		<md-button ui-sref="createLocal()">Crear nuevo local</md-button>
 		<md-list>
 		<md-subheader class="md-no-sticky">Locales</md-subheader>
 		<md-list-item class="md-2-line contact-item" ng-repeat="local in $ctrl.locals" ng-click="$ctrl.localDetails(local.id)">

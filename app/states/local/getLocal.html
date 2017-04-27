@@ -1,5 +1,5 @@
 <section name="GetLocal">
-	<md-content class="md-padding" layout-xs="column" layout="row">
+	<md-content class="md-padding" layout="row" layout-align="center center">
 		<div flex-xs flex-gt-xs="50" layout="column">
 			<md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
 				<md-card-title>
@@ -15,7 +15,7 @@
 				</md-card-title-media>
 				</md-card-title>
 				<md-card-actions layout="row" layout-align="end center">
-				<md-button>Editar</md-button>
+				<md-button ui-sref="updateLocal({ id: $ctrl.local.id })">Editar</md-button>
 				<md-button ui-sref="deleteLocal({ id: $ctrl.local.id })">Eliminar</md-button>
 				</md-card-actions>
 			</md-card>

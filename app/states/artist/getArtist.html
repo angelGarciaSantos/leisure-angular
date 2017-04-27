@@ -1,5 +1,5 @@
 <section name="GetArtist">
-	<md-content class="md-padding" layout-xs="column" layout="row">
+	<md-content layout="row" layout-align="center center">
 		<div flex-xs flex-gt-xs="50" layout="column">
 			<md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
 				<md-card-title>
@@ -7,6 +7,8 @@
 					<span class="md-headline">{{$ctrl.artist.name}}</span>
 					<span class="md-subhead">{{$ctrl.artist.description}}</span>
 					<span class="md-subhead">{{$ctrl.artist.rating}}</span>
+					<md-subheader class="md-no-sticky">Valoración global del artista</md-subheader>
+					<p>{{$ctrl.globalRating[0]}}</p>
 				</md-card-title-text>
 				<md-card-title-media>
 					<!-- TODO: ver como poner imagenes-->
@@ -14,7 +16,7 @@
 				</md-card-title-media>
 				</md-card-title>
 				<md-card-actions layout="row" layout-align="end center">
-				<md-button>Editar</md-button>
+				<md-button ui-sref="updateArtist({ id: $ctrl.artist.id })">Editar</md-button>
 				<md-button ui-sref="deleteArtist({ id: $ctrl.artist.id })">Eliminar</md-button>
 				</md-card-actions>
 			</md-card>

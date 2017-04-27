@@ -36,11 +36,28 @@
 
   <!--<div ng-view></div>-->
   
+<header>
+  <md-toolbar md-scroll-shrink>
+    <div layout="row" layout-align="center center" flex>
+      Leisure
+    </div>
+  </md-toolbar>
+</header>
+
   <menu></menu>
-  <div class="container text-center" style="padding-top:60px;" ui-view></div>
+  <main flex>
+    <div class="container text-center" style="padding-top:60px;" ui-view></div>
+  </main>
   <!--<div ui-view></div>-->
 
-  <div>Leisure app: v<span app-version></span></div>
+    <footer>
+      <md-toolbar class="md-scroll-shrink">
+        <div layout="row" layout-align="center center" flex>
+          Leisure app: v<span app-version></span>
+        </div>
+      </md-toolbar>
+    </footer>
+
 
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>

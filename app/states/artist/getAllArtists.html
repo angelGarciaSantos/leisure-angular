@@ -1,6 +1,7 @@
 <section name="GetAllArtists">
-  	<div flex layout-margin>
-	  <md-content flex>
+  	<div layout="row" layout-align="begin center">
+	  <md-content>
+		<md-button ui-sref="createArtist()">Crear nuevo artista</md-button>
 		<md-list>
 		<md-subheader class="md-no-sticky">Artistas</md-subheader>
 		<md-list-item class="md-2-line contact-item" ng-repeat="artist in $ctrl.artists" ng-click="$ctrl.artistDetails(artist.id)">

@@ -21,8 +21,15 @@
 					vm.comments = data;
 				});
 
+				//vm.globalRating = ratingsService.globalRating.get({ id: vm.eventId });
+
+
 				ratingsService.ratingsByEvent.query({ id: vm.eventId }).$promise.then(function(data) {
 					vm.ratings = data;
+				});
+
+				ratingsService.globalRatingEvent.query({ id: vm.eventId }).$promise.then(function(data) {
+					vm.globalRating = data;
 				});
 
 				vm.commentEvent = function () {

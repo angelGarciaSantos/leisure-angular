@@ -1,6 +1,7 @@
 <section name="GetAllEvents">
   	<div flex layout-margin>
 	  <md-content flex>
+		<md-button ui-sref="createEvent()">Crear nuevo evento</md-button>  
 		<md-list>
 		<md-subheader class="md-no-sticky">Eventos</md-subheader>
 		<md-list-item class="md-2-line contact-item" ng-repeat="event in $ctrl.events" ng-click="$ctrl.eventDetails(event.id)">

@@ -1,5 +1,5 @@
 <section name="CreateEvent">
-    <md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding>
+    <md-content md-theme="docs-dark" layout="row" layout-align="center center">
         <div>
             <md-input-container>
                 <label>Nombre</label>
@@ -12,15 +12,28 @@
             </md-input-container>
         </div>
         <div>
-            <div flex-gt-xs>
+            <!--<div flex-gt-xs>
                 <h4>Inicio</h4>
                 <md-datepicker ng-model="$ctrl.newEvent.beginDate" md-placeholder="Selecciona la fecha"></md-datepicker>
             </div>
             <div flex-gt-xs>
                 <h4>Fin</h4>
                 <md-datepicker ng-model="$ctrl.newEvent.endDate" md-placeholder="Selecciona la fecha"></md-datepicker>
-            </div>
+            </div>-->
+
+            <md-input-container>
+                <label>Inicio</label>
+                <input ng-model="$ctrl.newEvent.beginDate">
+            </md-input-container>
+
+            <md-input-container>
+                <label>Fin</label>
+                <input ng-model="$ctrl.newEvent.endDate">
+            </md-input-container>
         </div>
+
+        <!--TODO: poner un desplegable con la lista de locales, para seleccionar su ID -->
+
         <div>
             <md-button ng-click="$ctrl.createEvent()">Crear</md-button>
         </div>
