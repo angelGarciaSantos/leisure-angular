@@ -8,7 +8,9 @@ angular.module('myApp', [
   'myApp.version',
   'states', 
   'services',
-  'menu'
+  'menu', 
+  'ngMaterial',
+  'md.data.table'
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.hashPrefix('!');
