@@ -10,7 +10,7 @@ angular.module('myApp', [
   'services',
   'menu', 
   'ngMaterial',
-  'md.data.table'
+  'md.data.table',
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.hashPrefix('!');

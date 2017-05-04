@@ -1,0 +1,21 @@
+<section name="manageArtistsDialog">
+    <md-content md-theme="docs-dark" layout="column" layout-align="center center">      
+        <div>
+            <md-input-container>
+            <label>Modificar Local</label>
+            <md-select ng-model="ctrl.parent.selectedLocal">
+                <!--<md-option><em>None</em></md-option>-->
+                <md-option ng-repeat="local in ctrl.parent.allLocals" ng-value="local.id" >
+                {{local.name}}
+                </md-option>
+            </md-select>
+            </md-input-container>
+            <md-button ng-click="ctrl.parent.modifySelectedLocal()">Cambiar Local</md-button>
+        </div>
+        <div class="md-actions">
+            <md-button ng-click="ctrl.parent.dialogOpen=false;ctrl.parent.hideDialog()">
+                Aceptar
+            </md-button>
+        </div>
+    </md-content>
+</section>
