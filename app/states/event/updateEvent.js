@@ -10,69 +10,67 @@
 		})
 		.component('updateEvent', {
 			templateUrl: './states/event/updateEvent.html',
-			controller: function ($scope, $mdDialog, eventsService, artistsService, localsService, $state, $stateParams, $mdToast) {
+			controller: function ($timeout, $scope, $mdDialog, eventsService, artistsService, localsService, $state, $stateParams, $mdToast) {
                 var vm = this;
+				
 				vm.addArtistToEvent = new eventsService.addArtistToEvent();
 				vm.modifyLocal = new eventsService.modifyLocalFromEvent();   
-
-				$scope.selected = [];
-                vm.eventId = $stateParams.id;
-                vm.editEvent = eventsService.events.get({ id: vm.eventId });
 				
-				vm.selectedArtist;
-				vm.selectedLocal;
+				vm.selectedArtist = -1;
+				vm.selectedLocal = -1;
+				$scope.selected = [];									
 
-				artistsService.artistsByEvent.query({ id: vm.eventId }).$promise.then(function(data) {
-					vm.artists = data;
-				});
-				artistsService.artists.query().$promise.then(function(data) {
-					vm.allArtists = data;
-				});
-				localsService.locals.query().$promise.then(function(data) {
-					vm.allLocals = data;
-				});
+				vm.reloadAllLocals = function() {
+					localsService.locals.query().$promise.then(function(data) {
+						vm.allLocals = data;
+					});
+				}
 
+				vm.reloadAllArtists = function () {
+					artistsService.artists.query().$promise.then(function(data) {
+						vm.allArtists = data;
+					});
+				}
 
-				// $scope.license = {
-        		// 	expirationdate: '2015-12-15T23:00:00.000Z'
-    			// };
-
-    			// $scope.dt = new Date($scope.license.expirationdate);
+				vm.reloadEventArtists = function () {
+					artistsService.artistsByEvent.query({ id: vm.eventId }).$promise.then(function(data) {
+						vm.artists = data;	
+						artistsService.artistsByEvent.query({ id: vm.eventId }).$promise.then(function(data) {
+							vm.artists = data;	
+							artistsService.artistsByEvent.query({ id: vm.eventId }).$promise.then(function(data) {
+								vm.artists = data;	
+							});
+						});
+					});
+				};
         
                 vm.updateEvent = function () {
-					//vm.nuevoMovimiento.fecha = new Date(vm.nuevoMovimiento.fecha);
-					// var bd = new Date(vm.editEvent.beginDate)
-					// var ed = new Date(vm.editEvent.endDate)              
-					// vm.editEvent.beginDate = JSON.stringify(bd);
-					// vm.editEvent.endDate = JSON.stringify(ed);
-
                     vm.editEvent.$update({ id: vm.eventId })
 						.then(function (result) {
-							// cuando ha terminado el guardado del movimiento
-							// es momento de pedir una actualización de datos
-							//vm.nuevoMovimiento.importe = 0;
 							vm.editEvent = eventsService.events.get({ id: vm.eventId });
-
 						}, function (error) {
 							console.error(error);
 							//vm.nuevoMovimiento.importe = -9999;
 						});
 				};
 
+				function changeSelectedArtist (id)  {
+					vm.selectedArtist = id;
+				}
+
                 vm.addSelectedArtist = function () {
                    	vm.addArtistToEvent.$save({ eventId: vm.eventId, artistId: vm.selectedArtist })
 						.then(function (result) {
-							artistsService.artistsByEvent.query({ id: vm.eventId }).$promise.then(function(data) {
-								vm.artists = data;
-							});
-
+							vm.reloadEventArtists();							
 							$mdToast.show(
 								$mdToast.simple()
 									.textContent('Artista añadido correctamente!')
 									.position('top right')
 									.hideDelay(3000)
 								);
-							$state.reload();	
+							//$state.reload();	
+							
+
 
 
 							// cuando ha terminado el guardado del movimiento
@@ -105,20 +103,20 @@
                 vm.deleteSelectedArtist = function (artistId) {					
                    	vm.addArtistToEvent.$delete({ eventId: vm.eventId, artistId: artistId })
 						.then(function (result) {
-							artistsService.artistsByEvent.query({ id: vm.eventId }).$promise.then(function(data) {
-								vm.artists = data;
-							});
+							vm.reloadEventArtists();
 							$mdToast.show(
 								$mdToast.simple()
 									.textContent('Artista eliminado correctamente!')
 									.position('top right')
 									.hideDelay(3000)
 								);
-							$state.reload();	
+							//$state.reload();	
+
 							// cuando ha terminado el guardado del movimiento
 							// es momento de pedir una actualización de datos
 							//vm.nuevoMovimiento.importe = 0;
 						}, function (error) {
+							alert(error);
 							$mdToast.show(
 								$mdToast.simple()
 									.textContent('Error eliminando el artista.')
@@ -198,52 +196,57 @@
 					});
 					};
 
-  vm.greeting = 'Hello';
-  vm.hideDialog = $mdDialog.hide;
-  vm.showDialog = vm.showDialog;
+					vm.greeting = 'Hello';
+					vm.hideDialog = $mdDialog.hide;
+					vm.showDialog = vm.showDialog;
 
-  vm.showDialog = function(evt) {
-    vm.dialogOpen = true;
-    $mdDialog.show({
-      targetEvent: evt,
-      controller: function () { 
-		  this.parent = vm; 
-		},
-      controllerAs: 'ctrl',
-      templateUrl: './states/event/manageArtistsDialog.html'
-        // '<md-dialog>' +
-        // '  <md-content>{{ctrl.parent.greeting}}, world !</md-content>' +
-        // '  <div class="md-actions">' +
-        // '    <md-button ng-click="ctrl.parent.dialogOpen=false;ctrl.parent.hideDialog()">' +
-        // '      Close' +
-        // '    </md-button>' +
-        // '  </div>' +
-        // '</md-dialog>'
-    });
-  }
+					vm.showDialog = function(evt) {
+						vm.dialogOpen = true;
+						$mdDialog.show({
+						targetEvent: evt,
+						controller: function () { 
+							this.parent = vm; 
+							},
+						controllerAs: 'ctrl',
+						templateUrl: './states/event/manageArtistsDialog.html'
+							// '<md-dialog>' +
+							// '  <md-content>{{ctrl.parent.greeting}}, world !</md-content>' +
+							// '  <div class="md-actions">' +
+							// '    <md-button ng-click="ctrl.parent.dialogOpen=false;ctrl.parent.hideDialog()">' +
+							// '      Close' +
+							// '    </md-button>' +
+							// '  </div>' +
+							// '</md-dialog>'
+						});
+					}
 
-    vm.modifyLocalDialog = function(evt) {
-    vm.dialogOpen = true;
-    $mdDialog.show({
-      targetEvent: evt,
-      controller: function () { 
-		  this.parent = vm; 
-		},
-      controllerAs: 'ctrl',
-      templateUrl: './states/event/manageLocalDialog.html'
-        // '<md-dialog>' +
-        // '  <md-content>{{ctrl.parent.greeting}}, world !</md-content>' +
-        // '  <div class="md-actions">' +
-        // '    <md-button ng-click="ctrl.parent.dialogOpen=false;ctrl.parent.hideDialog()">' +
-        // '      Close' +
-        // '    </md-button>' +
-        // '  </div>' +
-        // '</md-dialog>'
-    });
-  }
+					vm.modifyLocalDialog = function(evt) {
+					vm.dialogOpen = true;
+					$mdDialog.show({
+						targetEvent: evt,
+						controller: function () { 
+							this.parent = vm; 
+							},
+						controllerAs: 'ctrl',
+						templateUrl: './states/event/manageLocalDialog.html'
+							// '<md-dialog>' +
+							// '  <md-content>{{ctrl.parent.greeting}}, world !</md-content>' +
+							// '  <div class="md-actions">' +
+							// '    <md-button ng-click="ctrl.parent.dialogOpen=false;ctrl.parent.hideDialog()">' +
+							// '      Close' +
+							// '    </md-button>' +
+							// '  </div>' +
+							// '</md-dialog>'
+						});
+					}
 
-				vm.$onInit = function() {
-      			};
+					vm.$onInit = function() {
+						vm.eventId = $stateParams.id;
+						vm.editEvent = eventsService.events.get({ id: vm.eventId });			
+						vm.reloadEventArtists();
+						vm.reloadAllArtists();
+						vm.reloadAllLocals();
+					};
 			}
 		})
 
