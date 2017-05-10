@@ -16,8 +16,8 @@
 				</md-card-title-media>
 				</md-card-title>
 				<md-card-actions layout="row" layout-align="end center">
-				<md-button ng-click="$ctrl.followArtist()">Seguir</md-button>
-				<md-button ng-click="$ctrl.unfollowArtist()">Dejar de Seguir</md-button>
+				<md-button ng-if="$ctrl.isFollowingArtist[0] === false" ng-click="$ctrl.followArtist()">Seguir</md-button>
+				<md-button ng-if="$ctrl.isFollowingArtist[0] === true" ng-click="$ctrl.unfollowArtist()">Dejar de Seguir</md-button>
 				<md-button ui-sref="updateArtist({ id: $ctrl.artist.id })">Editar</md-button>
 				<md-button ui-sref="deleteArtist({ id: $ctrl.artist.id })">Eliminar</md-button>
 				</md-card-actions>
