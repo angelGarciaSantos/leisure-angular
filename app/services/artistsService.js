@@ -10,6 +10,11 @@
 			{ 'update': { method: 'PUT' } }// un método custom con el verobo put para actualizaciones
 		); 
 		
+		this.artistsByKeywords = $resource(
+            "http://localhost:8080/leisure/artists/keywords/:keywords", // plantilla de la url del api
+			{ keywords: '@keywords' }, // la plantilla se rellena con la propiedad id
+			{ 'update': { method: 'PUT' } }// un método custom con el verobo put para actualizaciones
+		); 
 		//this.total = $resource("/api/priv/movimientos/totales/");
 		
 		this.artistsByEvent = $resource(

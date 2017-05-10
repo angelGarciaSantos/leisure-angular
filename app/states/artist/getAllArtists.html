@@ -1,6 +1,21 @@
 <section name="GetAllArtists">
   	<div layout="row" layout-align="begin center">
 	  <md-content>
+		
+		
+		<!--<md-input-container>
+			<label>Buscar</label>
+			<input ng-model="$ctrl.keywords">
+		</md-input-container>
+		<md-button ng-click="$ctrl.searchArtists()">Buscar</md-button>-->
+		<form ng-submit="$ctrl.searchArtists()" >
+			<md-input-container>
+				<label>Buscar</label>
+				<input ng-model="$ctrl.keywords" />
+			</md-input-container>
+			<md-button ng-click="$ctrl.searchArtists()">Buscar</md-button>
+		</form>
+
 		<md-button ui-sref="createArtist()">Crear nuevo artista</md-button>
 		<md-list>
 		<md-subheader class="md-no-sticky">Artistas</md-subheader>

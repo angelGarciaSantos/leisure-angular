@@ -12,7 +12,8 @@
 			templateUrl: './states/artist/getAllArtists.html',
 			controller: function (artistsService,$state) {
                 var vm = this;
-                this.valorCorte = 1;
+                vm.keywords = "";
+
 				/*
 				movimientosService.gettingMovimientos()
 					.success(function (result) {
@@ -33,10 +34,23 @@
 					vm.artists = data;
 				});
 
+				vm.searchArtists = function () {
+					if (vm.keywords && !(vm.keywords === "")) {
+						artistsService.artistsByKeywords.query({ keywords: vm.keywords}).$promise.then(function(data) {
+							vm.artists = data;
+						});
+					}
+					else {
+						artistsService.artists.query().$promise.then(function(data) {
+							vm.artists = data;
+						});
+					}
+				};
+
 				vm.artistDetails = function (id) {
 					var params = { id: id };
 					$state.go('getArtist', params);
-				}
+				};
 
 
 			}
