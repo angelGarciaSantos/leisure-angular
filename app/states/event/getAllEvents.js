@@ -12,14 +12,25 @@
 			templateUrl: './states/event/getAllEvents.html',
 			controller: function (eventsService,$state) {
                 var vm = this;
-				eventsService.events.query().$promise.then(function(data) {
-					vm.events = data;
-				});
+				vm.reloadAllEvents = function() {
+					eventsService.events.query().$promise.then(function(data) {
+						vm.events = data;
+					});
+				}
 
 				vm.eventDetails = function (id) {
 					var params = { id: id };
 					$state.go('getEvent', params);
 				}
+
+				vm.$onInit = function() {
+					vm.reloadAllEvents();
+				};
+
+
+
+
+
 			}
 		})
 

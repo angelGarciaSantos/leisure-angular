@@ -1,0 +1,54 @@
+<section name="manageArtistsDialog">
+    <md-content md-theme="docs-dark" layout="column" layout-align="center center">      
+        <div>
+            
+
+            <!--<md-table-pagination md-limit="query.limit" md-limit-options="[5, 10, 15]" md-page="query.page" md-total="{{desserts.count}}" md-on-paginate="getDesserts" md-page-select></md-table-pagination>-->
+        </div>
+        <div>
+            <!--<md-input-container>
+            <label>Seleccionar Local</label>
+            <md-select ng-model="ctrl.parent.selectedLocal">
+                <md-option ng-repeat="local in ctrl.parent.allLocals" ng-value="local.id" >
+                {{local.name}}
+                </md-option>
+            </md-select>
+            </md-input-container>-->
+            <md-table-container>
+            <table md-table md-row-select="true" multiple="false" ng-model="ctrl.parent.selectedLocal" md-progress="promise">
+                <thead md-head md-order="query.order" md-on-reorder="getDesserts">
+                <tr md-row>
+                    <!--<th md-column md-order-by="nameToLower"><span>Dessert (100g serving)</span></th>
+                    <th md-column md-numeric md-order-by="calories.value"><span>Calories</span></th>-->
+                    <th md-column md-numeric>ID</th>
+                    <th md-column md-numeric>Nombre</th>
+                    <th md-column md-numeric>Descripción</th>
+                    <th md-column md-numeric>Capacidad</th>
+                </tr>
+                </thead>
+                <tbody md-body>
+                    <!--<tr md-row md-select="artist" md-select-id="name" md-auto-select ng-repeat="artist in $ctrl.artists">-->
+                    <tr  md-row md-select="local.id" md-on-select="ctrl.parent.logItem" md-auto-select="true" ng-disabled="false" ng-repeat="local in ctrl.parent.allLocals">   
+                        <td md-cell>{{local.id}}</td>
+                        <td md-cell>{{local.name}}</td>
+                        <td md-cell>{{local.description}}</td>
+                        <td md-cell>{{local.capacity}}</td>
+                        
+                        <!--<td md-cell>{{dessert.fat.value | number: 1}}</td>
+                        <td md-cell>{{dessert.carbs.value}}</td>
+                        <td md-cell>{{dessert.protein.value | number: 1}}</td>
+                        <td md-cell>{{dessert.sodium.value}}</td>
+                        <td md-cell>{{dessert.calcium.value}}{{dessert.calcium.unit}}</td>
+                        <td md-cell>{{dessert.iron.value}}{{dessert.iron.unit}}</td>-->
+                    </tr>
+                </tbody>
+            </table>
+            </md-table-container>
+        </div>
+        <div class="md-actions">
+            <md-button ng-click="ctrl.parent.dialogOpen=false;ctrl.parent.hideDialog()">
+                Aceptar
+            </md-button>
+        </div>
+    </md-content>
+</section>

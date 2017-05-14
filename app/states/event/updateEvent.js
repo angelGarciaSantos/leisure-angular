@@ -10,8 +10,9 @@
 		})
 		.component('updateEvent', {
 			templateUrl: './states/event/updateEvent.html',
-			controller: function ($timeout, $scope, $mdDialog, eventsService, artistsService, localsService, $state, $stateParams, $mdToast) {
+			controller: function ($timeout, $scope, $mdDialog, $mdpTimePicker, eventsService, artistsService, localsService, $state, $stateParams, $mdToast) {
                 var vm = this;
+				vm.beginDateFormated;
 				
 				vm.addArtistToEvent = new eventsService.addArtistToEvent();
 				vm.modifyLocal = new eventsService.modifyLocalFromEvent();   
@@ -45,9 +46,16 @@
 				};
         
                 vm.updateEvent = function () {
+					var inicio = vm.editEvent.beginDate;
+					var inicioConv = inicio.toJSON();					
+					vm.editEvent.beginDate = inicioConv;					
+					var fin = vm.editEvent.endDate;
+					var finConv = fin.toJSON();					
+					vm.editEvent.endDate = finConv;
+
                     vm.editEvent.$update({ id: vm.eventId })
 						.then(function (result) {
-							vm.editEvent = eventsService.events.get({ id: vm.eventId });
+							vm.reloadEvent();
 						}, function (error) {
 							console.error(error);
 							//vm.nuevoMovimiento.importe = -9999;
@@ -127,6 +135,37 @@
 							//vm.nuevoMovimiento.importe = -9999;
 						});				
 				};
+
+				vm.reloadEvent = function () {
+					eventsService.events.get({ id: vm.eventId }).$promise.then(function(data) {
+						vm.editEvent = data;
+						if (vm.editEvent.beginDate && !(vm.editEvent.beginDate instanceof Date)) {
+							//var parseValue = self.dateLocale.parseDate(vm.editEvent.beginDate);
+							vm.editEvent.beginDate = vm.editEvent.beginDate;
+							var parseValue = new Date(vm.editEvent.beginDate);
+							if (isNaN(parseValue)) {
+								throw Error('The ng-model for md-datepicker must be a Date instance. ' +
+								'Currently the model is a: ' + (typeof vm.editEvent.beginDate));
+							} else {
+								vm.editEvent.beginDate = parseValue;
+								//vm.beginDateFormated = parseValue;
+							}
+						}
+						if (vm.editEvent.endDate && !(vm.editEvent.endDate instanceof Date)) {
+							//var parseValue = self.dateLocale.parseDate(vm.editEvent.beginDate);
+							vm.editEvent.endDate = vm.editEvent.endDate;
+							var parseValue = new Date(vm.editEvent.endDate);
+							if (isNaN(parseValue)) {
+								throw Error('The ng-model for md-datepicker must be a Date instance. ' +
+								'Currently the model is a: ' + (typeof vm.editEvent.endDate));
+							} else {
+								vm.editEvent.endDate = parseValue;
+								//vm.beginDateFormated = parseValue;
+							}
+						}
+
+					});
+				}
 
 
 				vm.showPrompt = function(ev) {
@@ -242,7 +281,14 @@
 
 					vm.$onInit = function() {
 						vm.eventId = $stateParams.id;
-						vm.editEvent = eventsService.events.get({ id: vm.eventId });			
+						//vm.editEvent = eventsService.events.get({ id: vm.eventId });	
+
+						vm.reloadEvent();
+
+
+
+						//paso de cargar fechas en string a una variable aparte en formato Date
+
 						vm.reloadEventArtists();
 						vm.reloadAllArtists();
 						vm.reloadAllLocals();

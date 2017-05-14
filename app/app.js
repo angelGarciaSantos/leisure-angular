@@ -11,6 +11,8 @@ angular.module('myApp', [
   'menu', 
   'ngMaterial',
   'md.data.table',
+  'mdPickers',
+  'angularMoment'
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.hashPrefix('!');

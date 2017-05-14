@@ -10,7 +10,7 @@
                 <input ng-model="$ctrl.editEvent.description">
             </md-input-container>
 
-            <md-input-container>
+            <!--<md-input-container>
                 <label>Fecha de inicio</label>
                 <input ng-model="$ctrl.editEvent.beginDate">
             </md-input-container>
@@ -18,7 +18,26 @@
                 <label>Fecha de fin</label>
                 <input ng-model="$ctrl.editEvent.endDate">
             </md-input-container>
-        </div>
+        </div>-->
+
+            <div flex-gt-xs>
+                <h4>Fecha Inicio</h4>
+                <md-datepicker ng-model="$ctrl.editEvent.beginDate"></md-datepicker>
+
+                <h2>Hora Inicio</h2>
+                <div>
+                    <h4 class="md-subhead">Hora Inicio</h4>        
+                    <mdp-time-picker ng-model="$ctrl.editEvent.beginDate"></mdp-time-picker>
+                </div>
+
+                <h4>Fecha Fin</h4>
+                <md-datepicker ng-model="$ctrl.editEvent.endDate"></md-datepicker>
+                <h2>Hora Fin</h2>
+                <div>
+                    <h4 class="md-subhead">Hora Fin</h4>        
+                    <mdp-time-picker ng-model="$ctrl.editEvent.endDate"></mdp-time-picker>
+                </div>
+            </div>
     
         <div layout="column">
 <!-- exact table from live demo -->
