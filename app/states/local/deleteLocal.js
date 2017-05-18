@@ -18,7 +18,7 @@
       
 				vm.local.$delete({ id: localId })
 					.then(function (result) {
-
+						$state.go('getAllLocals');
 					}, function (error) {
 						console.error(error);
 					});

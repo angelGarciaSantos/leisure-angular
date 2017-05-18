@@ -30,15 +30,14 @@
                 <label>Descripción</label>
                 <input ng-model="$ctrl.newArtist.description">
             </md-input-container>
-        </div>
-        <div>
-            <md-input-container class="md-icon-float md-icon-right md-block">
-                <label>Valoración</label>
-                <input ng-model="$ctrl.newArtist.rating" type="number" step="1" min="0" max="10">
+
+            <md-input-container>
+                <label>Imagen</label>
+                <input ng-model="$ctrl.newArtist.image">
             </md-input-container>
         </div>
         <div>
-            <md-button ng-click="$ctrl.createArtist()">Create</md-button>
+            <md-button class="md-raised md-primary" ng-click="$ctrl.createArtist()">Crear</md-button>
         </div>
     </md-content>
 </section>

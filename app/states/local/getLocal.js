@@ -16,6 +16,17 @@
 
                 var localId = $stateParams.id;
                 vm.local = localsService.locals.get({ id: localId });
+
+				vm.deleteLocal = function(){
+					vm.local.$delete({ id: localId })
+						.then(function (result) {
+							$state.go('getAllLocals');
+						}, function (error) {
+							console.error(error);
+						});
+				}
+      
+
 			}
 		})
 

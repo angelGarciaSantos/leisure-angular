@@ -12,14 +12,16 @@
 				</md-card-title-text>
 				<md-card-title-media>
 					<!-- TODO: ver como poner imagenes-->
-					<div class="md-media-lg card-media">IMAGEN</div>
+					<div class="md-media-lg card-media">
+						 <img ng-src="{{$ctrl.artist.image}}">
+					</div>
 				</md-card-title-media>
 				</md-card-title>
 				<md-card-actions layout="row" layout-align="end center">
-				<md-button ng-if="$ctrl.isFollowingArtist[0] === false" ng-click="$ctrl.followArtist()">Seguir</md-button>
-				<md-button ng-if="$ctrl.isFollowingArtist[0] === true" ng-click="$ctrl.unfollowArtist()">Dejar de Seguir</md-button>
-				<md-button ui-sref="updateArtist({ id: $ctrl.artist.id })">Editar</md-button>
-				<md-button ui-sref="deleteArtist({ id: $ctrl.artist.id })">Eliminar</md-button>
+				<md-button class="md-raised md-primary" ng-if="$ctrl.isFollowingArtist === false" ng-click="$ctrl.followArtist()">Seguir</md-button>
+				<md-button class="md-raised md-primary" ng-if="$ctrl.isFollowingArtist === true" ng-click="$ctrl.unfollowArtist()">Dejar de Seguir</md-button>
+				<md-button class="md-raised md-primary" ui-sref="updateArtist({ id: $ctrl.artist.id })">Editar</md-button>
+				<md-button class="md-raised md-primary" ng-click="$ctrl.deleteArtist()">Eliminar</md-button>
 				</md-card-actions>
 			</md-card>
 		</div> 

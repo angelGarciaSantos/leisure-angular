@@ -17,6 +17,16 @@
                 vm.eventId = $stateParams.id;
                 vm.event = eventsService.events.get({ id: vm.eventId });
 				
+				vm.deleteEvent = function () {
+					vm.event.$delete({ id: vm.eventId })
+						.then(function (result) {
+							$state.go('getAllEvents');
+						}, function (error) {
+							console.error(error);
+						});
+				}
+
+
 				commentsService.commentsByEvent.query({ id: vm.eventId }).$promise.then(function(data) {
 					vm.comments = data;
 				});

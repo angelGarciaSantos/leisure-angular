@@ -16,7 +16,7 @@
 				</md-card-title>
 				<md-card-actions layout="row" layout-align="end center">
 				<md-button ui-sref="updateEvent({ id: $ctrl.event.id })">Editar</md-button>
-				<md-button ui-sref="deleteEvent({ id: $ctrl.event.id })">Eliminar</md-button>
+				<md-button ng-click="$ctrl.deleteEvent()">Eliminar</md-button>
 				</md-card-actions>
 				<md-card-content>
 					<md-list>

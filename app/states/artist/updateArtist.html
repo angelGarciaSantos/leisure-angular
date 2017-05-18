@@ -1,24 +1,21 @@
 <section name="UpdateArtist">
-    <md-content md-theme="docs-dark" layout="row" layout-align="center center">
+    <md-content md-theme="docs-dark" layout="column" layout-align="center center">
         <div>
             <md-input-container>
                 <label>Nombre</label>
                 <input ng-model="$ctrl.editArtist.name">
             </md-input-container>
-
             <md-input-container>
                 <label>Descripción</label>
                 <input ng-model="$ctrl.editArtist.description">
             </md-input-container>
-        </div>
-        <div>
-            <md-input-container class="md-icon-float md-icon-right md-block">
-                <label>Valoración</label>
-                <input ng-model="$ctrl.editArtist.rating" type="number" step="1" min="0" max="10">
+            <md-input-container>
+                <label>Imagen</label>
+                <input ng-model="$ctrl.editArtist.image">
             </md-input-container>
         </div>
         <div>
-            <md-button ng-click="$ctrl.updateArtist()">Actualizar</md-button>
+            <md-button class="md-primary md-raised" ng-click="$ctrl.updateArtist()">Actualizar</md-button>
         </div>
     </md-content>
 

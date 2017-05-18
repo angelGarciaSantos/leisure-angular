@@ -12,9 +12,23 @@
 			templateUrl: './states/local/getAllLocals.html',
 			controller: function (localsService,$state) {
                 var vm = this;
+				vm.keywords = "";
 				localsService.locals.query().$promise.then(function(data) {
 					vm.locals = data;
 				});
+
+				vm.searchLocals = function () {
+					if (vm.keywords && !(vm.keywords === "")) {
+						localsService.localsByKeywords.query({ keywords: vm.keywords}).$promise.then(function(data) {
+							vm.locals = data;
+						});
+					}
+					else {
+						localsService.locals.query().$promise.then(function(data) {
+							vm.locals = data;
+						});
+					}
+				};
 
 				vm.localDetails = function (id) {
 					var params = { id: id };

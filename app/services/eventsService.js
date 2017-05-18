@@ -10,6 +10,12 @@
 			{ 'update': { method: 'PUT' } }// un método custom con el verobo put para actualizaciones
 		); 
 
+		this.eventsByKeywords = $resource(
+            "http://localhost:8080/leisure/events/keywords/:keywords", // plantilla de la url del api
+			{ keywords: '@keywords' }, // la plantilla se rellena con la propiedad id
+			{ 'update': { method: 'PUT' } }// un método custom con el verobo put para actualizaciones
+		); 
+
 		this.createEvent = $resource(
             "http://localhost:8080/leisure/events/:localId", // plantilla de la url del api
 			{ localId: '@localId' }, // la plantilla se rellena con la propiedad id

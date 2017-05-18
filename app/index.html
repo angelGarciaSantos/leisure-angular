@@ -4,6 +4,8 @@
 <!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
 <head>
+  <!-- Para evitar bug del favicon -->
+  <link rel="shortcut icon" href="">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Leisure</title>
@@ -45,7 +47,7 @@
   
 <header>
   <md-toolbar md-scroll-shrink>
-    <div layout="row" layout-align="center center" flex>
+    <div layout="row" layout-align="begin center" flex style="padding-left:20px;font-weight: bold;font-family: Segoe script;font-size: xx-large;">
       Leisure
     </div>
   </md-toolbar>
@@ -53,17 +55,19 @@
 
   <menu></menu>
   <main flex>
-    <div class="container text-center" style="padding-top:60px;" ui-view></div>
+    <div class="container text-center" style="padding-top:0px;" ui-view></div>
   </main>
   <!--<div ui-view></div>-->
 
-    <footer>
-      <md-toolbar class="md-scroll-shrink">
-        <div layout="row" layout-align="center center" flex>
-          Leisure app: v<span app-version></span>
-        </div>
-      </md-toolbar>
-    </footer>
+  <footer flex>
+      <div>
+        Leisure app: v<span app-version></span>
+      </div>
+  </footer>
+
+     	<!--<div class="modal-footer"> 
+ 		 <div><p>&copy; 2015 Test<span class="separator">-</span>All rights reserved</p></div>
+ 	</div>-->
 
 
   <!-- In production use:

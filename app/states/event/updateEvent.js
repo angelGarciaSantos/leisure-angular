@@ -17,8 +17,8 @@
 				vm.addArtistToEvent = new eventsService.addArtistToEvent();
 				vm.modifyLocal = new eventsService.modifyLocalFromEvent();   
 				
-				vm.selectedArtist = -1;
-				vm.selectedLocal = -1;
+				vm.selectedArtists = [];
+				vm.selectedLocal = [];
 				$scope.selected = [];									
 
 				vm.reloadAllLocals = function() {
@@ -39,7 +39,11 @@
 						artistsService.artistsByEvent.query({ id: vm.eventId }).$promise.then(function(data) {
 							vm.artists = data;	
 							artistsService.artistsByEvent.query({ id: vm.eventId }).$promise.then(function(data) {
-								vm.artists = data;	
+								vm.artists = data;
+								vm.selectedArtists = [];	
+								for (i = 0; i < vm.artists.length; i++) {
+									vm.selectedArtists.push(vm.artists[i].id);
+								}
 							});
 						});
 					});
@@ -63,11 +67,42 @@
 				};
 
 				function changeSelectedArtist (id)  {
-					vm.selectedArtist = id;
+					vm.selectedArtist = id; //TODO: esto se usa?
 				}
 
-                vm.addSelectedArtist = function () {
-                   	vm.addArtistToEvent.$save({ eventId: vm.eventId, artistId: vm.selectedArtist })
+				vm.addSelectedArtists = function () {
+					//recorremos artistas guardados
+					//por cada artista guardado, comprobamos que existe en los seleccionados.
+					//en caso de no existir en los seleccionados, hay que borrar el artista guardado.
+					var selected = false;
+					for (i = 0; i < vm.artists.length; i++) { 
+						selected = false;
+						for (j = 0; j < vm.selectedArtists.length; j++) {
+							if (vm.artists[i].id == vm.selectedArtists[j]){
+								selected = true;
+							}
+						}
+						if (!selected) {
+							vm.deleteSelectedArtist(vm.artists[i].id);
+						}				
+					}					
+
+					var exists = false;
+					for (i = 0; i < vm.selectedArtists.length; i++) { 
+						exists = false;
+						for (j = 0; j < vm.artists.length; j++) {
+							if (vm.artists[j].id == vm.selectedArtists[i]){
+								exists = true;
+							}
+						}
+						if (!exists) {
+							vm.addSelectedArtist(vm.selectedArtists[i]);
+						}				
+					}
+				}
+
+                vm.addSelectedArtist = function (selected) {
+                   	vm.addArtistToEvent.$save({ eventId: vm.eventId, artistId: selected })
 						.then(function (result) {
 							vm.reloadEventArtists();							
 							$mdToast.show(
@@ -77,13 +112,6 @@
 									.hideDelay(3000)
 								);
 							//$state.reload();	
-							
-
-
-
-							// cuando ha terminado el guardado del movimiento
-							// es momento de pedir una actualización de datos
-							//vm.nuevoMovimiento.importe = 0;
 						}, function (error) {
 							$mdToast.show(
 								$mdToast.simple()
@@ -97,11 +125,9 @@
 				};
 
 				vm.modifySelectedLocal = function () {
-					vm.modifyLocal.$update({ eventId: vm.eventId, localId: vm.selectedLocal  })
+					vm.modifyLocal.$update({ eventId: vm.eventId, localId: vm.selectedLocal[0]})
 						.then(function (result) {
-							// cuando ha terminado el guardado del movimiento
-							// es momento de pedir una actualización de datos
-							//vm.nuevoMovimiento.importe = 0;
+							vm.reloadEvent();
 						}, function (error) {
 							console.error(error);
 							//vm.nuevoMovimiento.importe = -9999;
@@ -139,6 +165,8 @@
 				vm.reloadEvent = function () {
 					eventsService.events.get({ id: vm.eventId }).$promise.then(function(data) {
 						vm.editEvent = data;
+						vm.selectedLocal = [];
+						vm.selectedLocal[0] = vm.editEvent.local.id;
 						if (vm.editEvent.beginDate && !(vm.editEvent.beginDate instanceof Date)) {
 							//var parseValue = self.dateLocale.parseDate(vm.editEvent.beginDate);
 							vm.editEvent.beginDate = vm.editEvent.beginDate;

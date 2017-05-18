@@ -14,8 +14,18 @@
                 var vm = this;
                 this.valorCorte = 1;
 
-                var userId = $stateParams.id;
-                vm.user = usersService.users.get({ id: userId });
+                vm.userId = $stateParams.id;
+                vm.user = usersService.users.get({ id: vm.userId });
+
+				vm.deleteUser = function() {
+					vm.user.$delete({ id: vm.userId })
+						.then(function (result) {
+
+						}, function (error) {
+							console.error(error);
+						});
+				}
+
 			}
 		})
 

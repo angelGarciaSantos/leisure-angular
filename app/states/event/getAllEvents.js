@@ -12,6 +12,19 @@
 			templateUrl: './states/event/getAllEvents.html',
 			controller: function (eventsService,$state) {
                 var vm = this;
+				vm.keywords = "";
+
+				vm.searchEvents = function () {
+					if (vm.keywords && !(vm.keywords === "")) {
+						eventsService.eventsByKeywords.query({ keywords: vm.keywords}).$promise.then(function(data) {
+							vm.events = data;
+						});
+					}
+					else {
+						vm.reloadAllEvents();
+					}
+				};
+
 				vm.reloadAllEvents = function() {
 					eventsService.events.query().$promise.then(function(data) {
 						vm.events = data;

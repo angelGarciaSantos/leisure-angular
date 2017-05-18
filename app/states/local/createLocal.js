@@ -10,20 +10,27 @@
 		})
 		.component('createLocal', {
 			templateUrl: './states/local/createLocal.html',
-			controller: function (localsService) {
+			controller: function ($mdToast, $state, localsService) {
                 var vm = this;
                 this.valorCorte = 1;
                 vm.newLocal = new localsService.locals();             
-                vm.createLocal = function () {
-					//vm.nuevoMovimiento.fecha = new Date(vm.nuevoMovimiento.fecha);              
-                    vm.newLocal.$save()
+				vm.createLocal = function () {     
+					vm.newLocal.$save()
 						.then(function (result) {
-							// cuando ha terminado el guardado del movimiento
-							// es momento de pedir una actualización de datos
-							//vm.nuevoMovimiento.importe = 0;
+							$mdToast.show(
+								$mdToast.simple()
+									.textContent('¡Local creado correctamente!')
+									.position('top right')
+									.hideDelay(3000)
+								);
+							$state.go('getAllLocals');
 						}, function (error) {
-							console.error(error);
-							//vm.nuevoMovimiento.importe = -9999;
+							$mdToast.show(
+								$mdToast.simple()
+									.textContent('Error: el local no ha podido crearse.')
+									.position('top right')
+									.hideDelay(4000)
+								);
 						});
 				};
 			}

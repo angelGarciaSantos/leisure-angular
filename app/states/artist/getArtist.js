@@ -13,14 +13,31 @@
 			controller: function (artistsService, $state, $stateParams, ratingsService) {
                 var vm = this;
                 this.valorCorte = 1;
-
+				//vm.imageUrl = "http://i.imgur.com/1asNWI9.png";
                 vm.artistId = $stateParams.id;
-                vm.artist = artistsService.artists.get({ id: vm.artistId });
-				//vm.isFollowingArtist = artistsService.followArtist.get({ artistId: vm.artistId, userId: 1 });
-				
-				artistsService.followArtist.query({ artistId: vm.artistId, userId:1 }).$promise.then(function(data) {
-					vm.isFollowingArtist = data;
+
+
+				vm.isFollowing = function(){
+					artistsService.followArtist.query({ artistId: vm.artistId, userId:1 }).$promise.then(function(data) {
+						var result = data;
+						vm.isFollowingArtist = result[0]; 
+					});	
+				}
+
+				artistsService.artists.get({ id: vm.artistId  }).$promise.then(function(data) {
+					vm.artist = data;
 				});	
+
+				vm.deleteArtist = function () {
+					vm.artist.$delete({ id: vm.artistId })
+						.then(function (result) {
+							$state.go('getAllArtists');
+						}, function (error) {
+							console.error(error);
+						});
+				}
+
+				vm.isFollowing();
 
 				ratingsService.globalRatingArtist.query({ id: vm.artistId }).$promise.then(function(data) {
 					vm.globalRating = data;
@@ -30,24 +47,16 @@
 				vm.followArtist = function () {
 					vm.follow.$save({ artistId: vm.artistId, userId: 1 }) //TODO: user id forzado
 						.then(function (result) {
-							artistsService.followArtist.query({ artistId: vm.artistId, userId:1 }).$promise.then(function(data) {
-								vm.isFollowingArtist = data;
-							});		
-							// cuando ha terminado el guardado del movimiento
-							// es momento de pedir una actualización de datos
-							//vm.nuevoMovimiento.importe = 0;
+							vm.isFollowing();	
 						}, function (error) {
 							console.error(error);
-							//vm.nuevoMovimiento.importe = -9999;
 						});
 				}
 
 				vm.unfollowArtist = function () {
 					vm.follow.$delete({ artistId: vm.artistId, userId: 1 })
 						.then(function (result) {
-							artistsService.followArtist.query({ artistId: vm.artistId, userId:1 }).$promise.then(function(data) {
-								vm.isFollowingArtist = data;
-							});	
+							vm.isFollowing();
 						}, function (error) {
 							console.error(error);
 						});

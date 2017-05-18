@@ -10,7 +10,7 @@
 		})
 		.component('updateArtist', {
 			templateUrl: './states/artist/updateArtist.html',
-			controller: function (artistsService, $state, $stateParams) {
+			controller: function ($mdToast, artistsService, $state, $stateParams) {
                 var vm = this;
                 this.valorCorte = 1;
 
@@ -21,12 +21,21 @@
 					//vm.nuevoMovimiento.fecha = new Date(vm.nuevoMovimiento.fecha);              
                     vm.editArtist.$update({ id: artistId })
 						.then(function (result) {
-							// cuando ha terminado el guardado del movimiento
-							// es momento de pedir una actualización de datos
-							//vm.nuevoMovimiento.importe = 0;
+							$mdToast.show(
+								$mdToast.simple()
+									.textContent('¡Artista actualizado correctamente!')
+									.position('top right')
+									.hideDelay(3000)
+								);
+							$state.go('getAllArtists');
 						}, function (error) {
 							console.error(error);
-							//vm.nuevoMovimiento.importe = -9999;
+								$mdToast.show(
+									$mdToast.simple()
+										.textContent('Error: el artista no ha podido actualizarse.')
+										.position('top right')
+										.hideDelay(4000)
+									);
 						});
 				};
 			}

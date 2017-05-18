@@ -10,7 +10,7 @@
 		})
 		.component('createArtist', {
 			templateUrl: './states/artist/createArtist.html',
-			controller: function (artistsService) {
+			controller: function ($mdToast, $state, artistsService) {
                 var vm = this;
                 this.valorCorte = 1;
                 vm.newArtist = new artistsService.artists();             
@@ -18,12 +18,20 @@
 					//vm.nuevoMovimiento.fecha = new Date(vm.nuevoMovimiento.fecha);              
                     vm.newArtist.$save()
 						.then(function (result) {
-							// cuando ha terminado el guardado del movimiento
-							// es momento de pedir una actualización de datos
-							//vm.nuevoMovimiento.importe = 0;
+							$mdToast.show(
+								$mdToast.simple()
+									.textContent('¡Artista creado correctamente!')
+									.position('top right')
+									.hideDelay(3000)
+								);
+							$state.go('getAllArtists');
 						}, function (error) {
-							console.error(error);
-							//vm.nuevoMovimiento.importe = -9999;
+							$mdToast.show(
+								$mdToast.simple()
+									.textContent('Error: el artista no ha podido crearse.')
+									.position('top right')
+									.hideDelay(4000)
+								);
 						});
 				};
 			}

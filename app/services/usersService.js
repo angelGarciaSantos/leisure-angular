@@ -9,5 +9,11 @@
 			{ id: '@id' }, // la plantilla se rellena con la propiedad id
 			{ 'update': { method: 'PUT' } }// un método custom con el verobo put para actualizaciones
 		); 
+
+		this.usersByKeywords = $resource(
+            "http://localhost:8080/leisure/users/keywords/:keywords", // plantilla de la url del api
+			{ keywords: '@keywords' }, // la plantilla se rellena con la propiedad id
+			{ 'update': { method: 'PUT' } }// un método custom con el verobo put para actualizaciones
+		); 
 	};
 } ());
