@@ -31,7 +31,7 @@
 							<md-divider ng-if="!$last"></md-divider>
 						</md-list-item>
 					</md-list>
-					<md-button ng-click="$ctrl.commentEvent()">Comentar</md-button>
+					<md-button ng-click="$ctrl.commentEventDialog()">Comentar</md-button>
 
 					<md-subheader class="md-no-sticky">Valoración global del evento</md-subheader>
 					<p>{{$ctrl.globalRating[0]}}</p>
@@ -47,7 +47,7 @@
 							<md-divider ng-if="!$last"></md-divider>
 						</md-list-item>
 					</md-list>
-					<md-button ng-click="$ctrl.rateEvent()">Valorar</md-button>
+					<md-button ng-click="$ctrl.rateEventDialog()">Valorar</md-button>
 				</md-card-content>
 			</md-card>
 		</div> 

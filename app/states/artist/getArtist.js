@@ -16,7 +16,6 @@
 				//vm.imageUrl = "http://i.imgur.com/1asNWI9.png";
                 vm.artistId = $stateParams.id;
 
-
 				vm.isFollowing = function(){
 					artistsService.followArtist.query({ artistId: vm.artistId, userId:1 }).$promise.then(function(data) {
 						var result = data;
