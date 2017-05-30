@@ -1,11 +1,10 @@
 (function () {
 
-	angular.module('states', ['getAllArtists', 'getArtist', 'createArtist','deleteArtist',
+	angular.module('states', ['getAllArtists', 'getArtist', 'createArtist',
 							'updateArtist',
-							'getAllLocals', 'getLocal', 'createLocal','deleteLocal','updateLocal',
-							'getAllEvents', 'getEvent', 'createEvent','deleteEvent','updateEvent',
-							'commentEvent','rateEvent',
-							'getAllUsers', 'getUser', 'createUser','deleteUser','updateUser',
+							'getAllLocals', 'getLocal', 'createLocal','updateLocal',
+							'getAllEvents', 'getEvent', 'createEvent','updateEvent',
+							'getAllUsers', 'getUser', 'createUser','updateUser',
 							'test','home'])
 
 }());
