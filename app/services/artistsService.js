@@ -21,7 +21,13 @@
             "http://localhost:8080/leisure/artists/event/:id", // plantilla de la url del api
 			{ id: '@id' }, // la plantilla se rellena con la propiedad id
 			{ 'update': { method: 'PUT' } }// un método custom con el verobo put para actualizaciones
-		); 
+		);
+
+		this.recommendedArtists = $resource(
+            "http://localhost:8080/leisure/artists/user/:id", // plantilla de la url del api
+			{ id: '@id' }, // la plantilla se rellena con la propiedad id
+			{ 'update': { method: 'PUT' } }// un método custom con el verobo put para actualizaciones
+		);
 
 		this.followArtist = $resource(
             "http://localhost:8080/leisure/artist/user/:artistId/:userId", // plantilla de la url del api

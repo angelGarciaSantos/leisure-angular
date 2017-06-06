@@ -10,7 +10,7 @@
 		})
 		.component('getArtist', {
 			templateUrl: './states/artist/getArtist.html',
-			controller: function (artistsService, $state, $stateParams, ratingsService) {
+			controller: function (artistsService, $state, $stateParams, ratingsService, tagsService) {
                 var vm = this;
                 this.valorCorte = 1;
 				//vm.imageUrl = "http://i.imgur.com/1asNWI9.png";
@@ -25,8 +25,11 @@
 
 				artistsService.artists.get({ id: vm.artistId  }).$promise.then(function(data) {
 					vm.artist = data;
-				});	
-
+					tagsService.tagsByArtist.query({ id: vm.artistId }).$promise.then(function(data) {
+						vm.tags = data;	
+					});					
+				});
+				
 				vm.deleteArtist = function () {
 					vm.artist.$delete({ id: vm.artistId })
 						.then(function (result) {
